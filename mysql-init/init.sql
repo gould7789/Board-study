@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS board_login
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE board_login;
+
+CREATE TABLE IF NOT EXISTS board (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(20) NOT NULL,
+    password CHAR(20) NOT NULL,
+    subject CHAR(20) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
