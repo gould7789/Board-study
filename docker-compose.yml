@@ -25,7 +25,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_DATABASE: board_login
+      TZ: Asia/Seoul   # ✅ MySQL 서버의 시간대를 KST로 설정
     volumes:
       - ./mysql-init:/docker-entrypoint-initdb.d
-    ports:
-      - "3306:3306"
+      - mysql-data:/var/lib/mysql   # ✅ DB 영구 저장
+
+volumes:
+  mysql-data:
+
