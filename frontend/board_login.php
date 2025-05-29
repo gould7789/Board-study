@@ -4,10 +4,10 @@
 
     // 검색어 처리
     $search = $_GET['search'] ?? '';
-    $conn = getDBConnection();
+    $conn = getDBConnection();      // db.php에 있는 함수로 MySQL과 연결된 객체를 반환
 
-    if ($search) {
-        $sql = "SELECT * FROM board WHERE subject LIKE ? ORDER BY id DESC";
+    if ($search) {  // 게시판 테이블에서 모든 글을 가져옴   최근 글이 위로 오게 정렬
+        $sql = "SELECT * FROM board WHERE subject LIKE ? ORDER BY id DESC";  
         $stmt = $conn->prepare($sql);
         $likeSearch = "%$search%";
         $stmt->bind_param("s", $likeSearch);
