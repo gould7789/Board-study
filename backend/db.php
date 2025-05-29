@@ -1,5 +1,7 @@
 <?php
 // DB 연결 모듈
+date_default_timezone_set("Asia/Seoul");
+
 function getDBConnection() {
     $host = 'mysql';
     $user = 'root';
