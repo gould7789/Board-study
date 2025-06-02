@@ -23,3 +23,8 @@
 ## 5. 게시글 삭제
 
 <img src="https://github.com/user-attachments/assets/8f299469-9990-41c4-9d63-246459717fe1" width="400">
+
+## 6. 페이지네이션
+
+<img src="https://github.com/user-attachments/assets/b31c3374-74d0-4e37-92d5-e11901db79b5" width="400">
+
