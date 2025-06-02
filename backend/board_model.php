@@ -81,4 +81,19 @@ function insertPost($name, $password, $subject, $content) {
     $conn->close();
 }
 
-
+// 전체 게시글 수 반환 : 전체 게시글 수를 확인하여 페이지 수 반환
+function getTotalPostCount($search = '') {
+    $conn = getDBConnection();
+    if($search) {
+        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM board WHERE subject LIKE ?");
+        $like = "$search";
+        $stmt->bind_param("s", $like);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }else {
+        $result = $conn->query("SELECT COUNT(*) as count FROM board");
+    }
+    $row = $result->fetch_assoc();
+    $conn->close();
+    return $row['count'];
+}
