@@ -17,6 +17,13 @@ if (!$id || !$password || !$name || !$subject || !$content) {
     exit;
 }
 
+// 비밀번호 먼저 확인
+if (!checkPassword($id, $password)) {
+    echo "비밀버호가 일치하지 않습니다.";
+    exit;
+}
+
+
 // 수정 실행
 $success = updatePost($id, $name, $password, $subject, $content);
 
@@ -26,6 +33,6 @@ if ($success) {
     exit;
 } else {
     // 수정 실패 시 메시지 출력
-    echo "수정에 실패했습니다. 비밀번호를 다시 확인해주세요.";
+    echo "수정에 실패했습니다.";
 }
 ?>

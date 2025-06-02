@@ -2,9 +2,23 @@
 require_once 'db.php';
 // 함수 모음
 
+// 비밀번호 확인 함수
+function checkPassword($id, $password) {
+    $conn = getDBConnection();
+    $stmt = $conn->prepare("SELECT * FROM board WHERE id = ? AND password = ?");
+    $stmt->bind_param("is", $id, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $match = $result->num_rows > 0;
+    $stmt->close();
+    $conn->close();
+    return $match;
+}
+
+
+
 
 // 수정 관련 함수
-
 // 특정 글 가져오기
 function getPostById($id) {
     $conn = getDBConnection();
@@ -18,7 +32,7 @@ function getPostById($id) {
     return $post;
 }
 
-// 게시글 수정
+// 게시글 수정 - 비밀번호 확인 후 해당 게시글을 수정
 function updatePost($id, $name, $password, $subject, $content) {
     $conn = getDBConnection();
 
@@ -57,7 +71,7 @@ function deletePost($id, $password) {
     return $success;
 }
 
-// 인서트 함수
+// 인서트(게시글 삽입) 함수 - 사용자가 작성한 새 게시글을 db에 저장
 function insertPost($name, $password, $subject, $content) {
     $conn = getDBConnection();
     $stmt = $conn->prepare("INSERT INTO board (name, password, subject, content) VALUES (?, ?, ?, ?)");
