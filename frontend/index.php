@@ -18,7 +18,7 @@ if ($search) {
     // 게시판 테이블에서 모든 글을 가져옴 최근 글이 위로 오게 정렬
     $sql = "SELECT * FROM board WHERE subject LIKE ? ORDER BY id DESC LIMIT ? OFFSET ?";
     $stmt = $conn->prepare($sql);
-    $likeSearch = "%$search%";
+    $likeSearch = "%$search%";      // 부분 검색
     $stmt->bind_param("sii", $likeSearch, $limit, $offset);
     $stmt->execute();
     $result = $stmt->get_result();
