@@ -84,6 +84,7 @@ function insertPost($name, $password, $subject, $content) {
 // 전체 게시글 수 반환 : 전체 게시글 수를 확인하여 페이지 수 반환
 function getTotalPostCount($search = '') {
     $conn = getDBConnection();
+    // 검색어가 있을 경우 검색 조건을 붙여서 카운트
     if($search) {
         $stmt = $conn->prepare("SELECT COUNT(*) as count FROM board WHERE subject LIKE ?");
         $like = "$search";
@@ -91,6 +92,7 @@ function getTotalPostCount($search = '') {
         $stmt->execute();
         $result = $stmt->get_result();
     }else {
+        // 검색어가 없으면 전체 글 수 
         $result = $conn->query("SELECT COUNT(*) as count FROM board");
     }
     $row = $result->fetch_assoc();
