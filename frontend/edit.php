@@ -28,11 +28,11 @@ if (!$post) {
         <!-- hidden : 화면에 표시하지 않고 폼 데이터를 서버로 전송 -->
         <input type="hidden" name="id" value="<?= $post['id'] ?>">
 
-        이름: <input type="text" name="name" value="<?= htmlspecialchars($post['name']) ?>"><br><br>
+        이름: <input type="text" name="name" value="<?= $post['name'] ?>"><br><br>
         비밀번호: <input type="password" name="password" required><br><br>  <!-- 비밀번호는 필수 입력 -->
-        제목: <input type="text" name="subject" value="<?= htmlspecialchars($post['subject']) ?>"><br><br>
+        제목: <input type="text" name="subject" value="<?= $post['subject'] ?>"><br><br>
         내용:<br>
-        <textarea name="content" rows="10" cols="60"><?= htmlspecialchars($post['content']) ?></textarea><br><br>
+        <textarea name="content" rows="10" cols="60"><?= $post['content'] ?></textarea><br><br>
 
         <input type="submit" value="수정 완료">
     </form>
