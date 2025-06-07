@@ -46,7 +46,7 @@ if ($search) {
     <!-- 검색 폼 -->
     <form method="get" action="board_login.php">
         <label for="search">제목: </label>
-        <input type="text" name="search" id="search" value="<?= htmlspecialchars($search) ?>">
+        <input type="text" name="search" id="search" value="<?= $search ?>">
         <input type="submit" value="검색">
     </form>
 
@@ -68,10 +68,10 @@ if ($search) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $number-- . "</td>";
-                    echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+                    echo "<td>" . $row['name'] . "</td>";
 
                     // 제목에 상세보기 링크 추가
-                    echo "<td><a href='view.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['subject']) . "</a></td>";
+                    echo "<td><a href='view.php?id=" . $row['id'] . "'>" . $row['subject'] . "</a></td>";
 
                     echo "<td>" . $row['created_at'] . "</td>";
                     echo "</tr>";
