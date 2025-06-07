@@ -26,14 +26,14 @@ if (!$post) {
 <body>
     <h2>게시판 > 상세보기</h2>
 
-    <h3><?= htmlspecialchars($post['subject']) ?></h3>
+    <h3><?= $post['subject'] ?></h3>
 
     <!-- 작성자와 작성일 출력 -->
-    <p><strong>작성자:</strong> <?= htmlspecialchars($post['name']) ?></p>
+    <p><strong>작성자:</strong> <?= $post['name'] ?></p>
     <p><strong>작성일:</strong> <?= $post['created_at'] ?></p>
 
     <!-- 본문 출력 -->
-    <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+    <p><?= nl2br($post['content']) ?></p>
 
     <br>
     <!-- 수정 버튼 -->
