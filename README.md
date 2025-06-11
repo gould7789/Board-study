@@ -28,3 +28,7 @@
 
 <img src="https://github.com/user-attachments/assets/b31c3374-74d0-4e37-92d5-e11901db79b5" width="400">
 
+
+# 다이어그램
+
+<img src="https://github.com/user-attachments/assets/455045be-e9c4-417c-ae84-b8c0a027b609" width="400">
