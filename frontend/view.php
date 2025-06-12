@@ -46,7 +46,7 @@ if (!$post) {
     <br><br>
 
     <!-- 목록 페이지로 돌아가기 -->
-    <a href="board_login.php">돌아가기</a>
+    <a href="index.php">돌아가기</a>
 </body>
 </html>
 
