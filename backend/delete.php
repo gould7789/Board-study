@@ -13,7 +13,7 @@ if(!checkPassword($id, $password)) {
 }
 
 if (deletePost($id, $password)) {
-    header("Location: ../board_login.php");
+    header("Location: ../index.php");
     exit;
 } else {
     // 삭제 실패시 다시 프론트로 보내서 에러 표시
