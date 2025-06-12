@@ -44,7 +44,7 @@ if ($search) {
     <h2>게시판 > 리스트</h2>
 
     <!-- 검색 폼 -->
-    <form method="get" action="board_login.php">
+    <form method="get" action="index.php">
         <label for="search">제목: </label>
         <input type="text" name="search" id="search" value="<?= $search ?>">
         <input type="submit" value="검색">

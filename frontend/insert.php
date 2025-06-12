@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // 게시글 삽입 함수
         insertPost($name, $password, $subject, $content);
-        header("Location: board_login.php");
+        header("Location: index.php");
         exit;
     } else {
         // 빈 항목 있을시 오류 메시지 출력
