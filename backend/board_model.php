@@ -99,3 +99,57 @@ function getTotalPostCount($search = '') {
     $conn->close();
     return $row['count'];
 }
+
+
+// ================================
+// 댓글 및 대댓글 관련 함수
+// ================================
+
+// 댓글 및 대댓글 삽입
+function insertComment($post_id, $parent_id, $password, $content) {
+    $conn = getDBConnection();
+    $stmt = $conn->prepare("INSERT INTO comments (post_id, parent_id, name, password, content) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("iisss", $post_id, $parent_id, $name, $password, $content);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+}
+
+// 특정 게시글의 댓글 전체 조회 (정렬 포함)
+function getCommentByPostId($post_id) {
+    $conn = getDBConnection();
+    $stmt = $conn->prepare("SELECT * FROM comments WHERE post_id = ? ORDER BY created_at ASC");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $comments = [];
+    while ($row = $result->fetch_assoc()) {
+        $comments[] = $row;
+    }
+    $stmt->close();
+    $conn->close();
+    return $comments;
+}
+
+// 댓글 삭제용 비밀번호 확인
+function checkCommentPassword($comment_id, $password) {
+    $conn = getDBConnection();
+    $stmt = $conn->prepare("SELECT * FROM comments WHERE id = ? AND password = ?");
+    $stmt->bind_param("is", $comment_id, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $match = $result->num_rows > 0;
+    $stmt->close();
+    $conn->close();
+    return $match;
+}
+
+// 댓글 삭제
+function deleteComment($comment_id) {
+    $conn = getDBConnection();
+    $stmt = $conn->prepare("DELETE FROM comments WHERE id = ?");
+    $stmt->bind_param("i", $comment_id);
+    $stmt->execute();
+    $stmt->close();
+    $conn->close();
+}
