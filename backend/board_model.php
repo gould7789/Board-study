@@ -167,8 +167,8 @@ function deleteComment($comment_id) {
     $conn->close();
 }
 
-// 댓글 계층 구조 출력 함수
-function renderComments($comments, $parent_id = null, $depth = 0) {
+// 댓글 계층 구조 출력 함수 (답글 폼 포함)
+function renderComments($comments, $parent_id = null, $depth = 0, $reply_to = null) {
     foreach ($comments as $comment) {
         if ($comment['parent_id'] == $parent_id) {
             echo str_repeat('$nbsp;', $depth * 4);
@@ -176,8 +176,21 @@ function renderComments($comments, $parent_id = null, $depth = 0) {
             echo "<strong>" . $comment['name'] . "</strong>: ";
             echo $comment['content'];
             echo " (" . $comment['created_at'] . ")";
+            echo " <a href='../frontend/view.php?id=" . $comment['post_id'] . "$reply_to=" . $comment['id'] . "'>[답글]</a>";
             echo " <a href='../frontend/delet_comment.php?id=" . $comment['id'] . "'>[삭제]</a?";
             echo "</div>";
+
+            // 대댓글 입력폼 출력
+            if (isset($_GET['reply_to']) && intval($_GET['reply_to']) === intval($comment['id'])) {
+                echo "<form method='post' action='../backend/insert_comment.php'>";
+                echo "<input type='hidden' name='post_id' value='" . $comment['post_id'] . "'>";
+                echo "<input type='hidden' name='parent_id value='" . $comment['id'] . "'>";
+                echo "이름: <input type='text' name='name' required><br>";
+                echo "비밀번호: <input type='password' name='password' required><br>";
+                echo "<input type='submit' value='대댓글 작성'>";
+                echo "</form><br>";
+            }
+
             renderComments($comments, $comment['id'], $depth + 1);
         }
     }
