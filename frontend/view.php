@@ -47,6 +47,28 @@ if (!$post) {
 
     <!-- 목록 페이지로 돌아가기 -->
     <a href="index.php">돌아가기</a>
+
+
+<?php
+$comments = getCommentByPostId($id);
+?>
+
+<hr>
+<h3>댓글</h3>
+<?php renderComments($comments); ?>
+
+<hr>
+<h3>댓글 작성</h3>
+<form method="post" action="../backend/insert_comment.php">
+    <input type="hidden" name="post_id" value="<?= $id ?>">
+    <input type="hidden" name="parent_id" value="">
+    이름: <input type="text" name="name" required><br>
+    비밀번호: <input type="password" name="password" required><br>
+    내용:<br>
+    <textarea name="content" rows="4" cols="50" required></textarea><br>
+    <input type="submit" value="댓글 작성">
+</form>
+
 </body>
 </html>
 
