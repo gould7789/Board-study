@@ -153,3 +153,18 @@ function deleteComment($comment_id) {
     $stmt->close();
     $conn->close();
 }
+
+// 댓글 계층 구조 출력 함수
+function renderComments($comments, $parent_id = null, $depth = 0) {
+    foreach ($comments as $comment) {
+        if ($comment['parent_id'] == $parent_id) {
+            echo str_repeat('$nbsp;', $depth * 4);
+            echo "<div>";
+            echo "<strong>" . $comment['name'] . "</strong>: ";
+            echo $comment['content'];
+            echo " (" . $comment['created_at'] . ")";
+            echo "</div>";
+            renderComments($comments, $comment['id'], $depth + 1);
+        }
+    }
+}
