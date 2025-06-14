@@ -132,7 +132,7 @@ function getCommentByPostId($post_id) {
 }
 
 // 특정 댓글 가져오기 (삭제할 post_id 조회)
-function getCommentByID($comment_id) {
+function getCommentById($comment_id) {
     $conn = getDBConnection();
     $stmt = $conn->prepare("SELECT * FROM comments WHERE id = ?");
     $stmt->bind_param("i", $comment_id);
