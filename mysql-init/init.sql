@@ -16,3 +16,15 @@ CREATE TABLE IF NOT EXISTS board (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP  -- 작성 시간
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- 댓글 및 대댓글 저장 테이블
+CREATE TABLE IF NOT EXISTS comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,  -- 댓글 ID
+    post_id INT NOT NULL,               -- 게시글 ID
+    parent_id INT DEFAULT NULL,         -- 부모 댓글 ID (NULL이면 원댓글)
+    name CHAR(20) NOT NULL,             -- 작성자 이름
+    password CHAR(20) NOT NULL,         -- 비밀번호
+    content TEXT NOT NULL,              -- 댓글 내용
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 작성 시간
+    FOREIGN KEY (post_id) REFERENCES board(id) ON DELETE CASCADE,
+    FOREIGN KEY (parent_id) REFERENCES comments(id) ON DELETE CASCADE
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
