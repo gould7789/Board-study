@@ -131,6 +131,19 @@ function getCommentByPostId($post_id) {
     return $comments;
 }
 
+// 특정 댓글 가져오기 (삭제할 post_id 조회)
+function getCommentByID($comment_id) {
+    $conn = getDBConnection();
+    $stmt = $conn->prepare("SELECT * FROM comments WHERE id = ?");
+    $stmt->bind_param("i", $comment_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $comment = $result->fetch_assoc();
+    $stmt->close();
+    $conn->close();
+    return $comment;
+}
+
 // 댓글 삭제용 비밀번호 확인
 function checkCommentPassword($comment_id, $password) {
     $conn = getDBConnection();
