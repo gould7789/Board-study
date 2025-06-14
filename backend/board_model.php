@@ -163,6 +163,7 @@ function renderComments($comments, $parent_id = null, $depth = 0) {
             echo "<strong>" . $comment['name'] . "</strong>: ";
             echo $comment['content'];
             echo " (" . $comment['created_at'] . ")";
+            echo " <a href='../frontend/delet_comment.php?id=" . $comment['id'] . "'>[삭제]</a?";
             echo "</div>";
             renderComments($comments, $comment['id'], $depth + 1);
         }
