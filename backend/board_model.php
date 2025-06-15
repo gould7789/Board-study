@@ -106,7 +106,7 @@ function getTotalPostCount($search = '') {
 // ================================
 
 // 댓글 및 대댓글 삽입
-function insertComment($post_id, $parent_id, $password, $content) {
+function insertComment($post_id, $parent_id, $name, $password, $content) {
     $conn = getDBConnection();
     $stmt = $conn->prepare("INSERT INTO comments (post_id, parent_id, name, password, content) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("iisss", $post_id, $parent_id, $name, $password, $content);
@@ -171,28 +171,34 @@ function deleteComment($comment_id) {
 function renderComments($comments, $parent_id = null, $depth = 0, $reply_to = null) {
     foreach ($comments as $comment) {
         if ($comment['parent_id'] == $parent_id) {
-            echo str_repeat('$nbsp;', $depth * 4);
+
+            //들여쓰기 및 대댓글 표시
             echo "<div>";
+            echo str_repeat('&nbsp;', $depth * 4);
+            if ($depth > 0) {
+                echo "ㄴ ";
+            }
             echo "<strong>" . $comment['name'] . "</strong>: ";
             echo $comment['content'];
             echo " (" . $comment['created_at'] . ")";
-            echo " <a href='../frontend/view.php?id=" . $comment['post_id'] . "$reply_to=" . $comment['id'] . "'>[답글]</a>";
-            echo " <a href='../frontend/edit_comment.php?id=" . $comment['id'] . "'>[수정]</a>";
-            echo " <a href='../frontend/delet_comment.php?id=" . $comment['id'] . "'>[삭제]</a?";
+            echo " <a href='view.php?id=" . $comment['post_id'] . "&reply_to=" . $comment['id'] . "'>[답글]</a>";
+            echo " <a href='edit_comment.php?id=" . $comment['id'] . "'>[수정]</a>";
+            echo " <a href='delete_comment.php?id=" . $comment['id'] . "'>[삭제]</a>";
             echo "</div>";
 
             // 대댓글 입력폼 출력
             if (isset($_GET['reply_to']) && intval($_GET['reply_to']) === intval($comment['id'])) {
                 echo "<form method='post' action='../backend/insert_comment.php'>";
                 echo "<input type='hidden' name='post_id' value='" . $comment['post_id'] . "'>";
-                echo "<input type='hidden' name='parent_id value='" . $comment['id'] . "'>";
+                echo "<input type='hidden' name='parent_id' value='" . $comment['id'] . "'>";
                 echo "이름: <input type='text' name='name' required><br>";
                 echo "비밀번호: <input type='password' name='password' required><br>";
+                echo "내용:<br><textarea name='content' rows='3' cols='40' required></textarea><br>";
                 echo "<input type='submit' value='대댓글 작성'>";
                 echo "</form><br>";
             }
 
-            renderComments($comments, $comment['id'], $depth + 1);
+            renderComments($comments, $comment['id'], $depth + 1, $reply_to);
         }
     }
 }

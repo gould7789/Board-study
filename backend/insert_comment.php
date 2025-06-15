@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // 삽입 후 해당 게시글 페이지로 이동
-    header("Location: ../frontend/view.php?id=$post_id");
+    header("Location: ../view.php?id=$post_id");
     exit;
 } else {
     echo "잘못된 접근입니다.";

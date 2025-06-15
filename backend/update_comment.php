@@ -24,5 +24,5 @@ $stmt->close();
 $conn->close();
 
 // 게시글로 리디렉트
-header("Location: ../frontend/view.php?id=$post_id");
+header("Location: ../view.php?id=$post_id");
 exit;
