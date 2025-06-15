@@ -22,7 +22,7 @@ if (!$comment) {
 <body>
     <h2>댓글 수정</h2>
 
-    <form method="post" action="../backend/update_comment.php?id=<?= $comment_id ?>">
+    <form method="post" action="../backend/update_comment.php?id=<?= $comment_id ?>" autocomplete="off">
         <input type="hidden" name="post_id" value="<?= $comment['post_id'] ?>">
         이름: <input type="text" name="name" value="<?= $comment['name'] ?>" required><br>
         비밀번호: <input type="password" name="password" required><br>
