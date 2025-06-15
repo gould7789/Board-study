@@ -10,7 +10,7 @@
     <h2>게시글 작성</h2>
 
     <!-- 게시글 작성 폼. insert.php로 전송 -->
-    <form method="post" action="insert.php">
+    <form method="post" action="insert.php" autocomplete="off">
         이름: <input type="text" name="name" required><br><br>              <!-- 이름 입력 -->
         비밀번호: <input type="password" name="password" required><br><br>  <!-- 작성자 확인용 비밀번호 입력 -->
         제목: <input type="text" name="subject" required><br><br>           <!-- 제목 입력 -->
