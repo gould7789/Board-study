@@ -31,7 +31,8 @@
 ## 7. 댓글
 <img src="https://github.com/user-attachments/assets/fb5978a9-f032-4e7a-a887-6dd5e5ba0205" width="400">
 
-
+### 7.1 대댓글
+<img src="https://github.com/user-attachments/assets/d7e282f7-31f2-4e59-9927-5398c609f012" width="400">
 
 
 # 다이어그램
