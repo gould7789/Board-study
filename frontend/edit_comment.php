@@ -5,7 +5,7 @@ require_once '../backend/board_model.php';
 $comment_id = $_GET['id'] ?? 0;
 $comment_id = intval($comment_id);
 
-$comment_id = getCommentById($comment_id);
+$comment = getCommentById($comment_id);
 
 if (!$comment) {
     echo "댓글이 존재하지 않습니다.";
@@ -27,7 +27,7 @@ if (!$comment) {
         이름: <input type="text" name="name" value="<?= $comment['name'] ?>" required><br>
         비밀번호: <input type="password" name="password" required><br>
         내용:<br>
-        <textarea name="content" rows="4" cols="50" required><?= $comment['comment'] ?></textarea><br>
+        <textarea name="content" rows="4" cols="50" required><?= $comment['content'] ?></textarea><br>
         <input type="submit" value="수정하기">
     </form>
 

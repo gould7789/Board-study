@@ -1,9 +1,8 @@
+<?php
 /*
 사용자가 댓글 삭제 요청 시
 비밀번호 입력 폼을 통해 본인 확인 절차 수행
 */
-
-<?php
 // 댓글 삭제 비밀번호 입력 페이지
 $comment_id = $_GET['id'] ?? 0;
 $comment_id = intval($comment_id);
