@@ -177,6 +177,7 @@ function renderComments($comments, $parent_id = null, $depth = 0, $reply_to = nu
             echo $comment['content'];
             echo " (" . $comment['created_at'] . ")";
             echo " <a href='../frontend/view.php?id=" . $comment['post_id'] . "$reply_to=" . $comment['id'] . "'>[답글]</a>";
+            echo " <a href='../frontend/edit_comment.php?id=" . $comment['id'] . "'>[수정]</a>";
             echo " <a href='../frontend/delet_comment.php?id=" . $comment['id'] . "'>[삭제]</a?";
             echo "</div>";
 
