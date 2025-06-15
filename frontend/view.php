@@ -50,12 +50,14 @@ if (!$post) {
 
 
 <?php
-$comments = getCommentByPostId($id);
+$reply_to = $_GET['reply_to'] ?? null;
+$reply_to = $reply_to !== null ? intval($reply_to) : null;
+$comments = getCommentByPostId($id);    // 댓글 조회
 ?>
 
 <hr>
 <h3>댓글</h3>
-<?php renderComments($comments); ?>
+<?php renderComments($comments, null, 0, $reply_to); ?>
 
 <hr>
 <h3>댓글 작성</h3>
